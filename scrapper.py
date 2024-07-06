@@ -20,11 +20,14 @@ def get_topic_pages(topic_url):
     pages = [topic_url]
     response = requests.get(topic_url, verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
-    pagination = soup.select('.iblock a')
+    
+    # Select all page links from the pagination
+    pagination = soup.select('ul.pagination a.page-link')
     for page in pagination:
         page_url = page['href']
-        if page_url not in pages:
-            pages.append(topic_url.rsplit('/', 1)[0] + '/' + page_url)
+        if page_url.startswith('http') and page_url not in pages:
+            pages.append(page_url)
+    
     return pages
 
 # Function to get MCQs from a given page
