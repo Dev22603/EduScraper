@@ -1,0 +1,5 @@
+Question Number,Question,A,B,C,D,Correct Option,Explanation,Topic
+1,"331, 482, 551, 263, 383, 362, 284",263,383,331,551,B,"In each number except 383, the product of first and third digits is the middle one.",odd-man-out-and-series
+2,"835, 734, 642, 751, 853, 981, 532",751,853,981,532,A,"In each number except 751, the difference of third and first digit is the middle one.",odd-man-out-and-series
+3,"41, 43, 47, 53, 61, 71, 73, 81",61,71,73,81,D,Each of the numbers except 81 is a prime number.,odd-man-out-and-series
+4,"3, 5, 7, 12, 17, 19",19,17,5,12,D,Each of the numbers is a prime number except 12.,odd-man-out-and-series
