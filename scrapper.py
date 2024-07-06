@@ -37,9 +37,9 @@ def get_mcqs(page_url):
     mcqs = []
     for question in soup.select('.bix-div-container'):
         q_text = question.select_one('.bix-td-qtxt').get_text(strip=True)
-        options = [opt.get_text(strip=True) for opt in question.select('.bix-td-option')]
-        answer = question.select_one('.jq-hdnakq').get_text(strip=True)
-        explanation = question.select_one('.bix-td-miscell').get_text(strip=True) if question.select_one('.bix-td-miscell') else 'N/A'
+        options = [opt.get_text(strip=True) for opt in question.select('.bix-tbl-options .bix-td-option-val div')]
+        answer = question.select_one('.jq-hdnakq')['value']
+        explanation = question.select_one('.bix-ans-description').get_text(strip=True) if question.select_one('.bix-ans-description') else 'N/A'
         mcqs.append({
             'question': q_text,
             'options': options,
