@@ -9,6 +9,15 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Function to get all topic URLs
 
 
+class Question:
+    def __init__(self, question, options, correct_option, explanation, topic):
+        self.question = question
+        self.options = options
+        self.correct_option = correct_option
+        self.explanation = explanation
+        self.topic = topic
+
+
 def get_topics(base_url):
     response = requests.get(base_url, verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -60,72 +69,44 @@ def get_mcqs(page_url):
 # Function to save MCQs to a text file
 
 
-def save_mcqs(mcqs, topic_name):
+def save_mcqs(mcqs, topic_name) -> list[Question]:
     directory = 'Aptitude'
     if not os.path.exists(directory):
         os.makedirs(directory)
-    Columns = ["Question Number", "Question", "A",
-               "B", "C", "D", "Correct Option", "explaination", "Topic"]
-
-    question_numbers = []
-    questions = []
-    A = []
-    B = []
-    C = []
-    D = []
-    correct_options = []
-    explanations = []
-    topics = []
-
+    Question_list = []
     with open(f'{directory}/{topic_name}.txt', 'a', encoding='utf-8') as file:
-        for (index, mcq) in enumerate(mcqs):
-            question_numbers.append(index+1)
-            questions.append(mcq['question'])
-            print(mcq['options'])
-            A.append(mcq['options'][0])
-            if len(mcq['options']) > 1:
-                B.append(mcq['options'][1])
-            else:
-                B.append('NA')
-            if len(mcq['options']) > 2:
-                C.append(mcq['options'][2])
-            else:
-                C.append('NA')
-            if len(mcq['options']) > 3:
-                D.append(mcq['options'][3])
-            else:
-                D.append('NA')
-            correct_options.append(mcq['answer'])
-            explanations.append(mcq['explanation'])
-            topics.append(topic_name)
-
+        for mcq in mcqs:
+            Question_list.append(
+                Question(mcq['question'], mcq['options'], mcq['answer'], mcq['explanation'], topic_name))
             file.write(f"Q: {mcq['question']}\n")
             for opt in mcq['options']:
                 file.write(f"{opt}\n")
             file.write(f"Answer: {mcq['answer']}\n")
             file.write(f"Explanation: {mcq['explanation']}\n")
             file.write("\n")
-    data = {
-        "Question Number": question_numbers,
-        "Question": questions,
-        "A": A,
-        "B": B,
-        "C": C,
-        "D": D,
-        "Correct Option": correct_options,
-        "Explanation": explanations,
-        "Topic": topics
-    }
-    Questions = pd.DataFrame(data)
-    Questions.to_csv(f'Questions.csv', index=False, encoding='utf-8')
+    return Question_list
 
 
 # Main function to scrape all topics and their pages
 
 
+def questions_to_dataframe(questions: list[Question]) -> pd.DataFrame:
+    data = {
+        "Question": [q.question for q in questions],
+        "Options": [q.options for q in questions],
+        "Correct Option": [q.correct_option for q in questions],
+        "Explanation": [q.explanation for q in questions],
+        "Topic": [q.topic for q in questions]
+    }
+    df = pd.DataFrame(data)
+    return df
+
+
 def main():
     base_url = 'https://www.indiabix.com/aptitude/questions-and-answers/'
     topics = get_topics(base_url)
+
+    questions = []
 
     for topic in topics:
         topic_name = topic.split('/')[-2]
@@ -133,7 +114,15 @@ def main():
 
         for page in pages:
             mcqs = get_mcqs(page)
-            save_mcqs(mcqs, topic_name)
+            Questions_List = save_mcqs(mcqs, topic_name)
+            questions.extend(Questions_List)
+
+    # Example usage:
+    Questions = questions_to_dataframe(questions)
+
+    print(Questions)
+    Questions.to_csv(f'Questions.csv', index=False, encoding='utf-8')
+    Questions.to_json('Questions.json', orient='records', lines=False)
 
 
 if __name__ == "__main__":
