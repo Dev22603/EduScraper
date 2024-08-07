@@ -1,0 +1,6 @@
+Question Number,Question,A,B,C,D,Correct Option,Explanation,Topic
+1,(243)n/5x 32n+ 1= ?9nx 3n- 1,1,2,9,3n,C,Given Expression=(243)(n/5)x 32n+ 19nx 3n- 1=(35)(n/5)x 32n+ 1(32)nx 3n- 1=(35 x (n/5)x 32n+ 1)(32nx 3n- 1)=3nx 32n+ 132nx 3n- 1=3(n+ 2n+ 1)3(2n+n- 1)=33n+ 133n- 1= 3(3n+ 1 - 3n+ 1)= 32= 9.,surds-and-indices
+2,1+1= ?1 +a(n-m)1 +a(m-n),0,12,1,am+n,C,1+1=1+11 +anam1 +aman1 +a(n-m)1 +a(m-n)=am+an(am+an)(am+an)=(am+an)(am+an)= 1.,surds-and-indices
+3,"Ifmandnare whole numbers such thatmn= 121, the value of (m- 1)n+ 1is:",1,10,121,1000,D,"We know that 112= 121.Puttingm= 11 andn= 2, we get:(m- 1)n+ 1= (11 - 1)(2 + 1)= 103= 1000.",surds-and-indices
+4,xb(b+c-a).xc(c+a-b).xa(a+b-c)= ?xcxaxb,xabc,1,xab+bc+ca,xa+b+c,B,Given Exp.=x(b-c)(b+c-a).x(c-a)(c+a-b).x(a-b)(a+b-c)=x(b-c)(b+c) -a(b-c).x(c-a)(c+a) -b(c-a).x(a-b)(a+b) -c(a-b)=x(b2-c2+c2-a2+a2-b2).x-a(b-c) -b(c-a) -c(a-b)= (x0xx0)= (1 x 1) = 1.,surds-and-indices
+5,"Ifx= 3 + 22, then the value ofx-1is:x",1,2,22,33,B,x-12=x+1- 2xx= (3 + 22) +1- 2(3 + 22)= (3 + 22) +1x(3 - 22)- 2(3 + 22)(3 - 22)= (3 + 22) + (3 - 22) - 2= 4.x-1= 2.x,surds-and-indices
