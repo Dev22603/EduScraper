@@ -1,4 +1,5 @@
 import os
+from typing import List
 import requests
 from bs4 import BeautifulSoup
 import urllib3
@@ -69,7 +70,7 @@ def get_mcqs(page_url):
 # Function to save MCQs to a text file
 
 
-def save_mcqs(mcqs, topic_name) -> list[Question]:
+def save_mcqs(mcqs, topic_name) -> List[Question]:
     directory = 'Aptitude'
     if not os.path.exists(directory):
         os.makedirs(directory)
